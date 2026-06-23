@@ -1,0 +1,64 @@
+/* ==========================================================================
+   EMScope — Color tokens
+   Light instrumentation theme. Base palette + semantic aliases.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand ---- */
+  --color-primary: #1F5C8C;          /* Deep instrument blue */
+  --color-primary-dark: #123A57;
+  --color-primary-bright: #2F86C8;
+  --color-secondary: #2E8F5E;        /* Saturated green */
+  --color-accent: #E0942A;           /* Amber — highlight / CTA */
+  --color-accent-bright: #F4AC3E;
+
+  /* ---- Secondary engineering accents ---- */
+  --color-violet: #7050A8;
+  --color-teal: #1A8F8F;
+  --color-rust: #C24A2E;
+
+  /* ---- Vertical identity (one per sensing module) ---- */
+  --color-electric: #A67C00;         /* dark mustard */
+  --color-magnetic: #5E3A99;         /* purple */
+  --color-nrf: #34495E;              /* dark slate */
+  --color-rfpower: #1E6B3A;          /* dark green */
+
+  /* ---- Safety scale (fixed meaning — never reuse for decoration) ---- */
+  --color-safe: #2E8F5E;
+  --color-moderate: #E0942A;
+  --color-high: #C0392B;
+
+  /* ---- Neutrals & surfaces ---- */
+  --color-bg: #F1F2EE;               /* page — warm off-white */
+  --color-surface: #FFFFFF;          /* cards */
+  --color-surface-alt: #EAF1F6;      /* tinted inset / chips */
+  --color-navy: #0E2A40;             /* dark contrast sections, navbar, footer */
+  --color-navy-2: #163B57;
+  --color-border: #D4D8D2;
+
+  /* ---- Text ---- */
+  --color-text-primary: #16181A;
+  --color-text-secondary: #454B4E;
+  --color-text-muted: #767D80;
+  --color-text-on-dark: #FFFFFF;
+  --color-text-on-dark-muted: #9FB6C7;
+
+  /* ---- Tag tints (background / foreground pairs) ---- */
+  --tag-red-bg: #FBD9D6;     --tag-red-fg: #A4291F;
+  --tag-orange-bg: #FBE3C7;  --tag-orange-fg: #B5651D;
+  --tag-yellow-bg: #FBF3C7;  --tag-yellow-fg: #8A7415;
+  --tag-green-bg: #DCF0DC;   --tag-green-fg: #266B2E;
+  --tag-blue-bg: #D9E6F7;    --tag-blue-fg: #1F5C8C;
+
+  /* ---- Semantic aliases ---- */
+  --text-body: var(--color-text-secondary);
+  --text-heading: var(--color-text-primary);
+  --text-meta: var(--color-text-muted);
+  --surface-page: var(--color-bg);
+  --surface-card: var(--color-surface);
+  --surface-inset: var(--color-surface-alt);
+  --surface-dark: var(--color-navy);
+  --border-default: var(--color-border);
+  --link: var(--color-primary);
+  --cta: var(--color-accent);
+}

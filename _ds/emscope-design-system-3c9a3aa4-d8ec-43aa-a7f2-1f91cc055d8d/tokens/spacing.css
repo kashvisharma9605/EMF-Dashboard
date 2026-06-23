@@ -1,0 +1,33 @@
+/* ==========================================================================
+   EMScope — Spacing, radius, borders, shadows
+   8px base grid. Subtle elevation only — instrumentation UIs stay flat.
+   ========================================================================== */
+
+:root {
+  /* ---- Spacing (8px base) ---- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+
+  /* ---- Radius ---- */
+  --radius-sm: 4px;      /* chips, metric pills */
+  --radius-card: 6px;    /* cards, buttons, panels */
+  --radius-pill: 20px;   /* tags */
+  --radius-full: 50%;    /* logo circle, status dots */
+
+  /* ---- Borders ---- */
+  --border-card: 1px solid var(--color-border);
+  --border-accent-top: 4px;   /* module-card colored top edge */
+  --border-section-accent: 3px solid var(--color-accent); /* navbar/hero/footer amber rule */
+
+  /* ---- Shadows (used sparingly, on hover) ---- */
+  --shadow-card-hover: 0 8px 18px rgba(14, 42, 64, 0.12);
+  --shadow-hero-text: 0 2px 18px rgba(47, 134, 200, 0.4);
+
+  /* ---- Layout ---- */
+  --container-max: 1180px;
+  --navbar-height: 80px;
+}
