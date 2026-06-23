@@ -62,6 +62,33 @@ def polarity_reversal_rate(samples, sample_period_s):
     return float(reversals / duration)
 
 
+def classify(ratio):
+    if ratio < 30:
+        return "Low"
+    elif ratio < 70:
+        return "Moderate"
+    else:
+        return "High"
+
+
+def classify_efield(value):
+    if value < 500:
+        return "Low"
+    elif value < 1500:
+        return "Moderate"
+    else:
+        return "High"
+
+
+def classify_magnetic(value):
+    if value < 145:
+        return "Low"
+    elif value < 180:
+        return "Moderate"
+    else:
+        return "High"
+
+
 def process_efield(efield_wave, sample_period_s):
     r = rms(efield_wave)
     field_vm = r * EFIELD_CAL
@@ -83,7 +110,7 @@ def process_efield(efield_wave, sample_period_s):
         "peak_vm": round(efield_state["peak"], 3),
         "avg_vm": round(avg_vm, 3),
         "exposure_ratio": round(exposure_ratio, 1),
-        "classification": classify(exposure_ratio),
+        "classification": classify_efield(r),
         "dominant_frequency_hz": round(freq, 1),
         "cumulative_exposure": round(efield_state["cumulative"], 2),
         "raw_wave": efield_wave
@@ -102,13 +129,14 @@ def process_hall(hall_wave, hall_baseline, sample_period_s):
     freq = dominant_frequency(delta, sample_period_s)
     rev_rate = polarity_reversal_rate(delta, sample_period_s)
     exposure_ratio = (current_mt / HALL_REF_LIMIT_MT) * 100
+    last_delta = abs(delta[-1]) if delta else 0
 
     return {
         "current_mt": round(current_mt, 3),
         "peak_mt": round(hall_state["peak"], 3),
         "avg_mt": round(avg_mt, 3),
         "exposure_ratio": round(exposure_ratio, 1),
-        "classification": classify(exposure_ratio),
+        "classification": classify_magnetic(last_delta),
         "dominant_frequency_hz": round(freq, 1),
         "polarity_reversal_rate": round(rev_rate, 1),
         "raw_signed_mt": [round(v, 3) for v in mt_values]
@@ -179,15 +207,6 @@ def process_power(dbm, total_hits):
         "signal_bar_level": signal_bar,
         "session_histogram": hist.tolist()
     }
-
-
-def classify(ratio):
-    if ratio < 30:
-        return "Low"
-    elif ratio < 70:
-        return "Moderate"
-    else:
-        return "High"
 
 
 @app.route("/data", methods=["POST"])
