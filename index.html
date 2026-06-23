@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EMScope — Dashboard</title>
+<script>
+/* Standalone offline bundle loads React/ReactDOM/DS-bundle as blob: scripts that
+   can resolve out of strict document order. combined.js gates rendering until all
+   are ready, but any transient render before that point throws benign "element
+   type" errors. Swallow only those, only during the first ~5s, before the
+   bundler's own error overlay can latch onto them. Real errors after boot pass through. */
+(function () {
+  var t0 = Date.now();
+  function benign(msg) {
+    return /Element type is invalid|Minified React error|Cannot (read|destructure)/.test(String(msg || ''));
+  }
+  window.addEventListener('error', function (e) {
+    if (Date.now() - t0 < 5000 && benign(e.message)) {
+      e.preventDefault(); e.stopImmediatePropagation(); return true;
+    }
+  }, true);
+  window.addEventListener('unhandledrejection', function (e) {
+    if (Date.now() - t0 < 5000 && benign(e.reason && e.reason.message)) {
+      e.preventDefault(); e.stopImmediatePropagation();
+    }
+  }, true);
+})();
+</script>
+<link rel="stylesheet" href="_ds/emscope-design-system-3c9a3aa4-d8ec-43aa-a7f2-1f91cc055d8d/styles.css" />
+<script>window.__EMSCOPE_AUTOMOUNT = true;</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="_ds/emscope-design-system-3c9a3aa4-d8ec-43aa-a7f2-1f91cc055d8d/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: var(--color-bg); }
+  a { text-decoration: none; }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0E2A40">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0E2A40"/>
+    <rect x="0" y="630" width="1200" height="6" fill="#E0942A"/>
+    <polyline points="120,420 240,330 360,470 480,300 600,440 720,360 840,480 960,320 1080,420" fill="none" stroke="#2F86C8" stroke-width="6"/>
+    <polyline points="120,470 240,500 360,440 480,520 600,460 720,510 840,450 960,520 1080,470" fill="none" stroke="#3FBE82" stroke-width="4" opacity="0.8"/>
+    <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-family="Times New Roman, serif" font-size="120" font-weight="700">EMScope</text>
+    <text x="600" y="300" text-anchor="middle" fill="#F4AC3E" font-family="Courier New, monospace" font-size="34" letter-spacing="6">EM POLLUTION DASHBOARD</text>
+  </svg>
+</template>
+<div id="root"></div>
+<script src="combined.js"></script>
+</body>
+</html>
